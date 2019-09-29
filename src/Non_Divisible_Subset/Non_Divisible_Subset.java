@@ -1,7 +1,6 @@
 package Non_Divisible_Subset;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -18,23 +17,30 @@ public class Non_Divisible_Subset {
             input_set[i]=scanner.nextInt();
 
 list_of_numbers_for_start_creating_subset.add(input_set[0]);
-        for (int a = 0; a<3; ++a) {
+        for (int a = 0; a<10; ++a) {
             List<Integer> subset=new ArrayList<>();
             if (list_of_numbers_for_start_creating_subset.size()>0) {
-                subset.add(list_of_numbers_for_start_creating_subset.get(0));
+                subset.add(input_set[(int)(Math.random()*input_set.length)]);
                 list_of_numbers_for_start_creating_subset.remove(0);
             }
-            for (int i = 1; i < input_set.length; ++i) {
-                int counter = 0;
-                for (int j = 0; j < get_size_of_input(subset); ++j)
-                    if ((input_set[i] + subset.get(j)) % k != 0 && input_set[i] != subset.get(j))
+            for (int i = 0; i < input_set.length; ++i) {
+                int counter=0;
+                for (int j = 0; j < get_size_of_input(subset); ++j) {
+                    if ((input_set[i] + subset.get(j)) % k == 0 && input_set[i] == subset.get(j))
+                        break;
+                    else if (input_set[i] != subset.get(j))
                         ++counter;
 
-                if (counter == get_size_of_input(subset))
+
+
+
+                }
+                if (counter==get_size_of_input(subset)-1)
                     subset.add(input_set[i]);
-                else list_of_numbers_for_start_creating_subset.add(input_set[i]);
+
             }
 list_of_results.add(subset.size());
+
         }
 
         int max=list_of_results.get(0);
